@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/darkoandreev/ng-rating.svg?token=dyC7xCjKChVxFuxWSFtn&branch=master)](https://travis-ci.com/darkoandreev/ng-rating)
+
 # AngularRating
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
