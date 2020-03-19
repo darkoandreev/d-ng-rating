@@ -1,0 +1,13 @@
+<button
+    *ngFor="let rating of ratings; let i = index"
+    type="button"
+    class="rating-item"
+    [attr.aria-selected]="rating.clicked"
+    [attr.tabindex]="i + 1" 
+    [attr.aria-posinset]="i + 1"
+    [attr.aria-setsize]="ratings.length"
+    (mouseenter)="hoveredItem(i)"
+    (mouseleave)="mouseLeave()"
+    (click)="itemClick(rating, i)">
+    <fa-icon [class.rating-item-icon-hover]="rating.hovered" class="rating-item-icon" [icon]="faStar"></fa-icon>
+</button>

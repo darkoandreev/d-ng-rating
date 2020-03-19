@@ -22,7 +22,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -45,7 +45,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -121,6 +120,47 @@
             "production": {
               "devServerTarget": "angular-rating:serve:production"
             }
+          }
+        }
+      }
+    },
+    "ng-rating": {
+      "projectType": "library",
+      "root": "projects/ng-rating",
+      "sourceRoot": "projects/ng-rating/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-rating/tsconfig.lib.json",
+            "project": "projects/ng-rating/ng-package.json"
+          },
+          
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-rating/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-rating/src/test.ts",
+            "tsConfig": "projects/ng-rating/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-rating/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-rating/tsconfig.lib.json",
+              "projects/ng-rating/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }

@@ -1,0 +1,27 @@
+:host {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.rating-item {
+    margin: 10px;
+    border: none;
+    outline: none;
+
+    &-icon {
+        font-size: 30px;
+        transition: 0.3s;
+    }
+
+    &:focus {
+        .rating-item-icon {
+            opacity: 0.7;
+        }
+    }
+}
+
+.rating-item-icon-hover {
+    color: #FFD700;
+    cursor: pointer;
+}

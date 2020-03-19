@@ -1,0 +1,11 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/ng-rating",
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "@fortawesome/free-solid-svg-icons" : "freeSolidSvgIcons",
+      "@fortawesome/angular-fontawesome" : "angularFontawesome"
+    }
+  }
+}
