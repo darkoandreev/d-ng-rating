@@ -1,16 +1,10 @@
-dist: trusty
-sudo: false
-
 language: node_js
 node_js:
   - '10'
 
-cache:
-  directories:
-    - ./node_modules
-
-install:
-  - npm install
+before_script:
+  - npm install -g @angular/cli
 
 script:
-  - npm run test ng-rating && npm run build ng-rating --prod
+  - npm run test-headless
+  - npm run build ng-rating --prod
