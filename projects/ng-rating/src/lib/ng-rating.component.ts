@@ -96,21 +96,21 @@ export class NgRatingComponent implements ControlValueAccessor {
     item.clicked = true;
     this.hoveredItem(index);
     this.change.emit(index + 1)
-    this.writeValue(index + 1);
   }
 
   // Function to call when the rating changes.
-  onChange = (rating: number) => {};
+  _controlValueAccessorChangeFn = (rating: number) => {};
 
   // Function to call when the input is touched (when a star is clicked).
   onTouched = () => {};
 
   writeValue(rating: number): void {
-    this.onChange(rating);
+    this.rating = rating;
+    this._controlValueAccessorChangeFn(rating);
   }
 
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    this._controlValueAccessorChangeFn = fn;
   }
 
   registerOnTouched(fn: any): void {
