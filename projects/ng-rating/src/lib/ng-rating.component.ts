@@ -6,11 +6,13 @@ import {
   forwardRef,
   Input,
   HostBinding,
+  ContentChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { faStar, faBan, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { RATING_SIZE_ERROR } from './ng-rating.error';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { NgRatingLabelDirective } from './ng-rating-label.directive';
 
 export const NG_RATING_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -25,21 +27,21 @@ export interface IRating {
 let UNIQUE_ID = 0;
 
 @Component({
-  selector: 'lib-ng-rating',
+  selector: 'ng-rating',
   templateUrl: './ng-rating.component.html',
   styleUrls: ['./ng-rating.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [NG_RATING_VALUE_ACCESSOR],
 })
 export class NgRatingComponent implements ControlValueAccessor {
+  @ContentChild(NgRatingLabelDirective) ratingLabelTemplate: NgRatingLabelDirective;
+
   @HostBinding('class.ng-star-rating') get starRatingClass(): boolean {
     return true;
   }
   @HostBinding('attr.id')
   @Input()
   id = `ng-star-rating-${UNIQUE_ID++}`;
-
-  @Input() color: string;
 
   /**
    * Attached to the aria-label attribute of the host element. In most cases, aria-labelledby will
@@ -57,6 +59,15 @@ export class NgRatingComponent implements ControlValueAccessor {
   ariaLabelledby: string | undefined = 'Star rating';
 
   @Input()
+  get rating(): number {
+    return this._rating;
+  }
+  set rating(value: number) {
+    this._rating = coerceNumberProperty(value);
+  }
+  private _rating: number;
+
+  @Input()
   get size(): number {
     return this._size;
   }
@@ -65,7 +76,7 @@ export class NgRatingComponent implements ControlValueAccessor {
       RATING_SIZE_ERROR();
     }
 
-    this._size = value;
+    this._size = coerceNumberProperty(value);
     this.ratings = Array.from(new Array(value)).map(() => {
       const rating: IRating = {
         hovered: false,
@@ -73,18 +84,13 @@ export class NgRatingComponent implements ControlValueAccessor {
       };
       return rating;
     });
+
+    if (this.rating > 0) {
+      this.ratings.forEach((item, i) => (item.hovered = this.rating - 1 >= i));
+      this._selectedIndex = this.rating - 1;
+    }
   }
   private _size: number;
-
-  @Input()
-  get rating(): number {
-    return this._rating;
-  }
-  set rating(value: number) {
-    this._rating = value;
-    this.ratings.forEach((item, i) => (item.hovered = value - 1 >= i));
-  }
-  private _rating: number;
 
   @Input()
   get readonly(): boolean {
@@ -138,9 +144,8 @@ export class NgRatingComponent implements ControlValueAccessor {
   mouseLeave(): void {
     if (!this.readonly) {
       this.ratings.forEach((item, index) => {
-        if (index >= this._selectedIndex && !item.clicked) {
-          item.hovered = false;
-        }
+        item.clicked = false;
+        item.hovered = !(index > this._selectedIndex);
       });
     }
   }
@@ -171,8 +176,11 @@ export class NgRatingComponent implements ControlValueAccessor {
   onTouched: () => any = () => {};
 
   writeValue(rating: number): void {
-    this.rating = rating;
     this._controlValueAccessorChangeFn(rating);
+
+    this.rating = rating;
+    this._selectedIndex = rating - 1;
+    this.ratings.forEach((item, i) => (item.hovered = rating - 1 >= i));
   }
 
   registerOnChange(fn: (value: any) => void): void {

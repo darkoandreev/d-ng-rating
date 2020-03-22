@@ -1,1 +1,3 @@
-<lib-ng-rating (rateChange)="change($event)" [size]="6"> </lib-ng-rating>
+<ng-rating (rateChange)="this.ratingLabel = $event" [rating]="rating" [size]="6">
+  <ng-template ngRatingLabel>{{ this.ratingLabel }}</ng-template>
+</ng-rating>

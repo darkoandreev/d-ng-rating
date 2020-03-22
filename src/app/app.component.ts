@@ -8,8 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular-rating';
   rating = 5;
-
-  change(item: number): void {
-    console.log(item);
-  }
+  ratingLabel: string;
 }

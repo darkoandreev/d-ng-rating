@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { NgRatingComponent } from './ng-rating.component';
 
 describe('NgRatingComponent', () => {
@@ -8,9 +7,8 @@ describe('NgRatingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NgRatingComponent ]
-    })
-    .compileComponents();
+      declarations: [NgRatingComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

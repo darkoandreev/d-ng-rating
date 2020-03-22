@@ -21,3 +21,7 @@
     <fa-icon [class.rating-item-icon-hover]="rating.hovered" class="rating-item-icon" [icon]="icon"></fa-icon>
   </button>
 </ng-container>
+
+<div class="rating-label" *ngIf="ratingLabelTemplate">
+  <ng-container [ngTemplateOutlet]="ratingLabelTemplate!.template"></ng-container>
+</div>

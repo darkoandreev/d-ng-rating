@@ -2,41 +2,49 @@
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
 
-  .rating-item {
-    margin: 10px;
-    border: none;
-    outline: none;
+.rating-item {
+  border: none;
+  outline: none;
 
-    &-icon {
-      font-size: 30px;
-      transition: 0.3s;
-    }
-
-    &-disabled {
-      pointer-events: none;
-      opacity: 0.7;
-    }
-
-    &:focus {
-      .rating-item-icon {
-        opacity: 0.7;
-      }
-    }
+  &-icon {
+    font-size: 1.875rem;
+    transition: 0.3s;
   }
 
-  .rating-cancel {
+  &-disabled {
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    .rating-item-icon {
+      opacity: 0.7;
+    }
+  }
+}
+
+.rating {
+  &-cancel {
     border: none;
     outline: none;
 
     fa-icon {
-      font-size: 30px;
+      font-size: 1.875rem;
       color: #dc143c;
 
       &:hover {
         cursor: pointer;
       }
     }
+  }
+
+  &-label {
+    display: flex;
+    align-self: center;
+    padding-left: 1rem;
+    font-size: 1.875rem;
   }
 }
 
