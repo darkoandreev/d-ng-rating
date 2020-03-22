@@ -14,11 +14,19 @@ import { RATING_SIZE_ERROR } from './ng-rating.error';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { NgRatingLabelDirective } from './ng-rating-label.directive';
 
+/**
+ * Provider that allows the rating component to register as a ControlValueAccessor.
+ * @docs-private @internal
+ */
 export const NG_RATING_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => NgRatingComponent),
   multi: true,
 };
+
+/**
+ * Rating item model.
+ */
 export interface IRating {
   hovered: boolean;
   clicked: boolean;
@@ -48,6 +56,9 @@ let UNIQUE_ID = 0;
   providers: [NG_RATING_VALUE_ACCESSOR],
 })
 export class NgRatingComponent implements ControlValueAccessor {
+  /** @hidden @internal */
+  public ratings: IRating[];
+
   /** @hidden @internal */
   @ContentChild(NgRatingLabelDirective) public ratingLabelTemplate: NgRatingLabelDirective;
 
@@ -247,10 +258,8 @@ export class NgRatingComponent implements ControlValueAccessor {
    */
   @Output() public rateCancel: EventEmitter<void> = new EventEmitter();
 
+  // Currently selected rating item index.
   private _selectedIndex = -1;
-
-  /** @hidden @internal */
-  public ratings: IRating[];
 
   // Function to call when the rating changes.
   private _controlValueAccessorChangeFn: (value: any) => void = () => {};
