@@ -1,27 +1,46 @@
 :host {
-    display: inline-flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
-.rating-item {
+  .rating-item {
     margin: 10px;
     border: none;
     outline: none;
 
     &-icon {
-        font-size: 30px;
-        transition: 0.3s;
+      font-size: 30px;
+      transition: 0.3s;
+    }
+
+    &-disabled {
+      pointer-events: none;
+      opacity: 0.7;
     }
 
     &:focus {
-        .rating-item-icon {
-            opacity: 0.7;
-        }
+      .rating-item-icon {
+        opacity: 0.7;
+      }
     }
+  }
+
+  .rating-cancel {
+    border: none;
+    outline: none;
+
+    fa-icon {
+      font-size: 30px;
+      color: #dc143c;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 .rating-item-icon-hover {
-    color: #FFD700;
-    cursor: pointer;
+  color: #ffd700;
+  cursor: pointer;
 }

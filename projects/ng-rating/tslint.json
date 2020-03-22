@@ -1,17 +1,10 @@
 {
   "extends": "../../tslint.json",
   "rules": {
-    "directive-selector": [
-      true,
-      "attribute",
-      "lib",
-      "camelCase"
-    ],
-    "component-selector": [
-      true,
-      "element",
-      "lib",
-      "kebab-case"
-    ]
+    "directive-selector": [true, "attribute", "lib", "camelCase"],
+    "component-selector": [true, "element", "lib", "kebab-case"],
+    "variable-name": {
+      "options": ["ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"]
+    }
   }
 }
