@@ -13,20 +13,20 @@
   "private": true,
   "husky": {
     "hooks": {
-        "pre-commit": "pretty-quick --staged && ng lint",
-        "pre-push": "ng build ng-rating --prod"
+      "pre-commit": "pretty-quick --staged && ng lint",
+      "pre-push": "ng build ng-rating --prod"
     }
-  },  
+  },
   "dependencies": {
-    "@angular/animations": "~9.0.6",
+    "@angular/animations": "~9.1.0",
     "@angular/cdk": "^9.1.2",
-    "@angular/common": "~9.0.6",
-    "@angular/compiler": "~9.0.6",
-    "@angular/core": "~9.0.6",
-    "@angular/forms": "~9.0.6",
-    "@angular/platform-browser": "~9.0.6",
-    "@angular/platform-browser-dynamic": "~9.0.6",
-    "@angular/router": "~9.0.6",
+    "@angular/common": "~9.1.0",
+    "@angular/compiler": "~9.1.0",
+    "@angular/core": "~9.1.0",
+    "@angular/forms": "~9.1.0",
+    "@angular/platform-browser": "~9.1.0",
+    "@angular/platform-browser-dynamic": "~9.1.0",
+    "@angular/router": "~9.1.0",
     "@fortawesome/angular-fontawesome": "^0.6.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
@@ -35,11 +35,11 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.900.6",
-    "@angular-devkit/build-ng-packagr": "~0.900.6",
-    "@angular/cli": "~9.0.6",
-    "@angular/compiler-cli": "~9.0.6",
-    "@angular/language-service": "~9.0.6",
+    "@angular-devkit/build-angular": "~0.901.0",
+    "@angular-devkit/build-ng-packagr": "~0.901.0",
+    "@angular/cli": "~9.1.0",
+    "@angular/compiler-cli": "~9.1.0",
+    "@angular/language-service": "~9.1.0",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
