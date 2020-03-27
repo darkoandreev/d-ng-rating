@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { faStar, faBan, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { RATING_SIZE_ERROR } from './ng-rating.error';
+import { RATING_SIZE_ERROR, RATE_SET_ERROR } from './ng-rating.error';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { NgRatingLabelDirective } from './ng-rating-label.directive';
 
@@ -100,6 +100,9 @@ export class NgRatingComponent implements ControlValueAccessor {
     return this._rating;
   }
   public set rating(value: number) {
+    if (value <= 0) {
+      RATE_SET_ERROR();
+    }
     this._rating = coerceNumberProperty(value);
   }
   private _rating: number;
@@ -132,7 +135,7 @@ export class NgRatingComponent implements ControlValueAccessor {
     });
 
     if (this.rating > 0) {
-      this.ratings.forEach((item, i) => (item.hovered = this.rating - 1 >= i));
+      this.ratingsHover(this.rating - 1);
       this._selectedIndex = this.rating - 1;
     }
   }
@@ -267,10 +270,14 @@ export class NgRatingComponent implements ControlValueAccessor {
   // Function to call when the input is touched (when a star is clicked).
   private onTouched: () => any = () => {};
 
+  private ratingsHover(index: number): void {
+    this.ratings.forEach((item, i) => (item.hovered = index >= i));
+  }
+
   /** @hidden @internal */
   public hoveredItem(index: number): void {
     if (!this.readonly) {
-      this.ratings.forEach((item, i) => (item.hovered = index >= i));
+      this.ratingsHover(index);
     }
   }
 
@@ -307,11 +314,14 @@ export class NgRatingComponent implements ControlValueAccessor {
 
   /** @hidden @internal */
   public writeValue(rating: number): void {
-    this._controlValueAccessorChangeFn(rating);
+    if (rating) {
+      this._controlValueAccessorChangeFn(rating);
+      this.rating = rating;
+      console.log(this.rating);
 
-    this.rating = rating;
-    this._selectedIndex = rating - 1;
-    this.ratings.forEach((item, i) => (item.hovered = rating - 1 >= i));
+      this._selectedIndex = rating - 1;
+      this.ratingsHover(rating - 1);
+    }
   }
 
   /** @hidden @internal */

@@ -7,4 +7,5 @@ before_script:
 
 script:
   - npm run test-headless
+  - npm run lint
   - npm run build ng-rating --prod
