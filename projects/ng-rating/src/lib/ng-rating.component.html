@@ -5,18 +5,13 @@
   <button
     type="button"
     class="rating-item"
-    [attr.aria-selected]="rating.clicked"
-    [attr.tabindex]="disabled ? null : i + 1"
+    [attr.aria-selected]="this._selectedIndex === i"
     [attr.aria-posinset]="i + 1"
-    [attr.aria-setsize]="ratings.length"
-    [attr.aria-disabled]="disabled"
-    [attr.aria-readonly]="readonly"
     [disabled]="disabled"
     [class.rating-item-disabled]="disabled"
     [ngStyle]="rateStyle"
     (mouseenter)="hoveredItem(i)"
-    (mouseleave)="mouseLeave()"
-    (click)="itemClick(rating, i)"
+    (click)="itemClick(i)"
   >
     <fa-icon [class.rating-item-icon-hover]="rating.hovered" class="rating-item-icon" [icon]="icon"></fa-icon>
   </button>

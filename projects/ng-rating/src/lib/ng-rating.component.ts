@@ -7,12 +7,16 @@ import {
   Input,
   HostBinding,
   ContentChild,
+  OnChanges,
+  SimpleChanges,
+  HostListener,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { faStar, faBan, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { RATING_SIZE_ERROR, RATE_SET_ERROR } from './ng-rating.error';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { NgRatingLabelDirective } from './ng-rating-label.directive';
+import { Key } from '../util/key';
 
 /**
  * Provider that allows the rating component to register as a ControlValueAccessor.
@@ -29,7 +33,6 @@ export const NG_RATING_VALUE_ACCESSOR: any = {
  */
 export interface IRating {
   hovered: boolean;
-  clicked: boolean;
 }
 
 let UNIQUE_ID = 0;
@@ -55,9 +58,12 @@ let UNIQUE_ID = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [NG_RATING_VALUE_ACCESSOR],
 })
-export class NgRatingComponent implements ControlValueAccessor {
+export class NgRatingComponent implements OnChanges, ControlValueAccessor {
   /** @hidden @internal */
   public ratings: IRating[];
+
+  // Currently selected rating item index.
+  public _selectedIndex = -1;
 
   /** @hidden @internal */
   @ContentChild(NgRatingLabelDirective) public ratingLabelTemplate: NgRatingLabelDirective;
@@ -85,6 +91,42 @@ export class NgRatingComponent implements ControlValueAccessor {
   @HostBinding('attr.aria-labelledby')
   @Input('aria-labelledby')
   public ariaLabelledby: string | undefined = 'Star rating';
+
+  @HostBinding('attr.aria-valuemin') get ariaValueMin(): number {
+    return 0;
+  }
+
+  @HostBinding('attr.aria-valuemax') get ariaValueMax(): number {
+    return this.size;
+  }
+
+  @HostBinding('attr.aria-valuenow') get ariaValueNow(): number {
+    return this._selectedIndex + 1;
+  }
+
+  @HostBinding('attr.aria-valuetext') get ariaValueTextAttr(): string {
+    return this.ariaValueText;
+  }
+
+  @HostBinding('attr.role') get role(): string {
+    return 'slider';
+  }
+
+  @HostBinding('attr.tabindex') get tabindexAttr(): number {
+    return this.disabled ? -1 : 0;
+  }
+
+  @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean {
+    return this.disabled;
+  }
+
+  @HostBinding('attr.aria-readonly') get ariaReadonly(): boolean {
+    return this.readonly;
+  }
+
+  @HostBinding('attr.aria-setsize') get ariaSetSize(): number {
+    return this.size;
+  }
 
   /**
    * Gets/sets the `rating` for the component.
@@ -129,15 +171,9 @@ export class NgRatingComponent implements ControlValueAccessor {
     this.ratings = Array.from(new Array(value)).map(() => {
       const rating: IRating = {
         hovered: false,
-        clicked: false,
       };
       return rating;
     });
-
-    if (this.rating > 0) {
-      this.ratingsHover(this.rating - 1);
-      this._selectedIndex = this.rating - 1;
-    }
   }
   private _size: number;
 
@@ -261,17 +297,11 @@ export class NgRatingComponent implements ControlValueAccessor {
    */
   @Output() public rateCancel: EventEmitter<void> = new EventEmitter();
 
-  // Currently selected rating item index.
-  private _selectedIndex = -1;
-
-  // Function to call when the rating changes.
-  private _controlValueAccessorChangeFn: (value: any) => void = () => {};
-
-  // Function to call when the input is touched (when a star is clicked).
-  private onTouched: () => any = () => {};
-
-  private ratingsHover(index: number): void {
-    this.ratings.forEach((item, i) => (item.hovered = index >= i));
+  ngOnChanges(changes: SimpleChanges): void {
+    if ('rating' in changes && changes.rating.currentValue > 0) {
+      this.ratingsHover(this.rating - 1);
+      this._selectedIndex = this.rating - 1;
+    }
   }
 
   /** @hidden @internal */
@@ -282,34 +312,61 @@ export class NgRatingComponent implements ControlValueAccessor {
   }
 
   /** @hidden @internal */
-  public mouseLeave(): void {
+  public itemClick(index: number): void {
     if (!this.readonly) {
-      this.ratings.forEach((item, index) => {
-        item.clicked = false;
-        item.hovered = !(index > this._selectedIndex);
-      });
-    }
-  }
-
-  /** @hidden @internal */
-  public itemClick(item: IRating, index: number): void {
-    if (!this.readonly) {
-      this._selectedIndex = index;
-      item.clicked = true;
-      this.hoveredItem(index);
-      this.onTouched();
-      this.rateChange.emit(index + 1);
+      this.update(index);
     }
   }
 
   /** @hidden @internal */
   public cancel(): void {
     this._selectedIndex = -1;
-    this.ratings.forEach((item) => {
-      item.hovered = false;
-      item.clicked = false;
-    });
+    this.ratings.forEach((item: IRating) => (item.hovered = false));
     this.rateCancel.emit();
+  }
+
+  /** @hidden @internal */
+  @HostListener('mouseleave')
+  public mouseLeave(): void {
+    if (!this.readonly) {
+      this.ratings.forEach((item: IRating, index) => (item.hovered = !(index > this._selectedIndex)));
+    }
+  }
+
+  @HostListener('blur')
+  public blur(): void {
+    this.onTouched();
+  }
+
+  /** Handle rating using arrow keys and home/end keys */
+  @HostListener('keydown', ['$event'])
+  public handleKeyDown(event: KeyboardEvent): void {
+    switch (event.code) {
+      case Key.ArrowDown:
+      case Key.ArrowLeft:
+        if (this._selectedIndex > -1) {
+          this._selectedIndex--;
+          this.update(this._selectedIndex);
+        }
+        break;
+      case Key.ArrowUp:
+      case Key.ArrowRight:
+        if (this._selectedIndex < this.size - 1) {
+          this._selectedIndex++;
+          this.update(this._selectedIndex);
+        }
+        break;
+      case Key.Home:
+        this.update(0);
+        break;
+      case Key.End:
+        this.update(this.size - 1);
+        break;
+      default:
+        return;
+    }
+
+    event.preventDefault();
   }
 
   /** @hidden @internal */
@@ -337,5 +394,26 @@ export class NgRatingComponent implements ControlValueAccessor {
   /** @hidden @internal */
   public setDisabledState(value: boolean): void {
     this.disabled = value;
+  }
+
+  private update(index: number): void {
+    this._selectedIndex = index;
+    this.hoveredItem(this._selectedIndex);
+    this.onTouched();
+    this.rateChange.emit(index + 1);
+  }
+
+  // Function to call when the rating changes.
+  private _controlValueAccessorChangeFn: (value: any) => void = () => {};
+
+  // Function to call when the input is touched (when a star is clicked).
+  private onTouched: () => any = () => {};
+
+  private ratingsHover(index: number): void {
+    this.ratings.forEach((item: IRating, i) => (item.hovered = index >= i));
+  }
+
+  private get ariaValueText(): string {
+    return `${this._selectedIndex + 1} out of ${this.size}`;
   }
 }

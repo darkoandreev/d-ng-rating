@@ -4,6 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NgRatingModule } from './ng-rating.module';
 import { FormsModule, NgModel } from '@angular/forms';
+import { Key } from '../util/key';
 
 const NG_STAR_RATING_CLASS = '.ng-star-rating';
 const NG_STAR_RATING_ITEM_CLASS = '.ng-star-rating .rating-item';
@@ -60,7 +61,7 @@ describe('NgRatingComponent', () => {
       expect(ratings.length).toEqual(4);
 
       ratings.forEach((rating) => {
-        expect(rating).toEqual({ clicked: false, hovered: false });
+        expect(rating).toEqual({ hovered: false });
       });
     });
 
@@ -73,7 +74,7 @@ describe('NgRatingComponent', () => {
       const labelElement = fixture.debugElement.query(By.css(NG_STAR_RATING_LABEL)).nativeElement;
 
       expect(component.ratingLabel).toEqual(4);
-      expect(component.ratingComponent.itemClick).toHaveBeenCalledWith({ hovered: true, clicked: true }, 3);
+      expect(component.ratingComponent.itemClick).toHaveBeenCalledWith(3);
       expect(labelElement.innerText).toEqual('4');
 
       ratingItemElement = fixture.debugElement.queryAll(By.css(NG_STAR_RATING_ITEM_CLASS))[4];
@@ -101,7 +102,7 @@ describe('NgRatingComponent', () => {
 
       const ratings = component.ratingComponent.ratings;
       ratings.forEach((rating) => {
-        expect(rating).toEqual({ clicked: false, hovered: false });
+        expect(rating).toEqual({ hovered: false });
       });
     });
 
@@ -207,11 +208,12 @@ describe('NgRatingComponent', () => {
       expect(readonlyComponent.ratingComponent.disabled).toBeTruthy();
 
       const ratingItemElements = readonlyFixture.debugElement.queryAll(By.css(NG_STAR_RATING_ITEM_CLASS));
+      const ratingElement = readonlyFixture.debugElement.query(By.directive(NgRatingComponent));
+
+      expect(ratingElement.nativeElement.getAttribute('aria-disabled')).toEqual('true');
       ratingItemElements.forEach((debugElement) => {
         const element: Element = debugElement.nativeElement;
-
         expect(element.classList).toContain('rating-item-disabled');
-        expect(element.getAttribute('aria-disabled')).toEqual('true');
       });
     });
   });
@@ -240,7 +242,84 @@ describe('NgRatingComponent', () => {
       expect(writeValueSpy).toHaveBeenCalledWith(4);
     }));
   });
+
+  describe('ng rating keyboard support', () => {
+    let keyboardfixture: ComponentFixture<NgRatingTestComponent>;
+    let keyboardComponent: NgRatingTestComponent;
+
+    beforeEach(() => {
+      keyboardfixture = TestBed.createComponent(NgRatingTestComponent);
+      keyboardComponent = keyboardfixture.componentInstance;
+      keyboardfixture.detectChanges();
+    });
+
+    it('should handle arrow keys', () => {
+      const element = keyboardfixture.debugElement.query(By.directive(NgRatingComponent));
+      let event = createKeyDownEvent(Key.ArrowRight);
+      keyboardComponent.ratingComponent.handleKeyDown(event);
+      keyboardfixture.detectChanges();
+
+      expect(keyboardComponent.ratingLabel).toEqual(1);
+      expect(keyboardComponent.ratingComponent._selectedIndex).toBe(0);
+      expect(element.nativeElement.getAttribute('aria-valuenow')).toEqual('1');
+      expect(event.preventDefault).toHaveBeenCalled();
+
+      event = createKeyDownEvent(Key.ArrowUp);
+      keyboardComponent.ratingComponent.handleKeyDown(event);
+      keyboardfixture.detectChanges();
+
+      expect(keyboardComponent.ratingLabel).toEqual(2);
+      expect(keyboardComponent.ratingComponent._selectedIndex).toBe(1);
+      expect(element.nativeElement.getAttribute('aria-valuenow')).toEqual('2');
+      expect(event.preventDefault).toHaveBeenCalled();
+
+      event = createKeyDownEvent(Key.ArrowLeft);
+      keyboardComponent.ratingComponent.handleKeyDown(event);
+      keyboardfixture.detectChanges();
+
+      expect(keyboardComponent.ratingLabel).toEqual(1);
+      expect(keyboardComponent.ratingComponent._selectedIndex).toBe(0);
+      expect(element.nativeElement.getAttribute('aria-valuenow')).toEqual('1');
+      expect(event.preventDefault).toHaveBeenCalled();
+
+      event = createKeyDownEvent(Key.ArrowDown);
+      keyboardComponent.ratingComponent.handleKeyDown(event);
+      keyboardfixture.detectChanges();
+
+      expect(keyboardComponent.ratingLabel).toEqual(0);
+      expect(keyboardComponent.ratingComponent._selectedIndex).toBe(-1);
+      expect(element.nativeElement.getAttribute('aria-valuenow')).toEqual('0');
+      expect(event.preventDefault).toHaveBeenCalled();
+    });
+
+    it('should handle home/end keys', () => {
+      const element = keyboardfixture.debugElement.query(By.directive(NgRatingComponent));
+      let event = createKeyDownEvent(Key.Home);
+      keyboardComponent.ratingComponent.handleKeyDown(event);
+      keyboardfixture.detectChanges();
+
+      expect(keyboardComponent.ratingLabel).toEqual(1);
+      expect(keyboardComponent.ratingComponent._selectedIndex).toBe(0);
+      expect(element.nativeElement.getAttribute('aria-valuenow')).toEqual('1');
+      expect(event.preventDefault).toHaveBeenCalled();
+
+      event = createKeyDownEvent(Key.End);
+      keyboardComponent.ratingComponent.handleKeyDown(event);
+      keyboardfixture.detectChanges();
+
+      expect(keyboardComponent.ratingLabel).toEqual(keyboardComponent.size);
+      expect(keyboardComponent.ratingComponent._selectedIndex).toBe(keyboardComponent.size - 1);
+      expect(element.nativeElement.getAttribute('aria-valuenow')).toEqual(`${keyboardComponent.size}`);
+      expect(event.preventDefault).toHaveBeenCalled();
+    });
+  });
 });
+
+function createKeyDownEvent(key: string): KeyboardEvent {
+  const event = { code: key, preventDefault: () => {} };
+  spyOn(event, 'preventDefault');
+  return event as KeyboardEvent;
+}
 
 @Component({
   template: `
