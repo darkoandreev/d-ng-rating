@@ -1,22 +1,25 @@
-<button [ngStyle]="cancelRateStyle" *ngIf="showCancelIcon" class="rating-cancel" (click)="cancel()">
+<button *ngIf="showCancelIcon" class="ng-rating-cancel" (click)="cancel()">
   <fa-icon [icon]="cancelIcon"></fa-icon>
 </button>
-<ng-container *ngFor="let rating of ratings; let i = index">
+<ng-container *ngFor="let rating of ratings; let index = index">
   <button
     type="button"
-    class="rating-item"
-    [attr.aria-selected]="this._selectedIndex === i"
-    [attr.aria-posinset]="i + 1"
+    class="ng-rating-item"
+    [attr.aria-selected]="_selectedIndex === index"
+    [attr.aria-posinset]="index + 1"
     [disabled]="disabled"
-    [class.rating-item-disabled]="disabled"
-    [ngStyle]="rateStyle"
-    (mouseenter)="hoveredItem(i)"
-    (click)="itemClick(i)"
+    [class.ng-rating-item-disabled]="disabled"
+    (mouseenter)="hoveredItem(index)"
+    (click)="handleClick(index)"
   >
-    <fa-icon [class.rating-item-icon-hover]="rating.hovered" class="rating-item-icon" [icon]="icon"></fa-icon>
+    <ng-container
+      *ngTemplateOutlet="ratingTemplateContent || ratingTemplate || defaultTemplate; context: rating"
+    ></ng-container>
   </button>
 </ng-container>
 
-<div class="rating-label" *ngIf="ratingLabelTemplate">
-  <ng-container [ngTemplateOutlet]="ratingLabelTemplate!.template"></ng-container>
-</div>
+<ng-content select="[ngRatingLabel], ng-rating-label"></ng-content>
+
+<ng-template #defaultTemplate let-hovered="hovered">
+  <fa-icon [class.ng-rating-item-icon-hover]="hovered" class="ng-rating-item-icon" [icon]="icon"></fa-icon>
+</ng-template>

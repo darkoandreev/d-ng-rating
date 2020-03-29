@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { NgRatingComponent } from './ng-rating.component';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, DebugElement, OnInit } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NgRatingModule } from './ng-rating.module';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Key } from '../util/key';
 
 const NG_STAR_RATING_CLASS = '.ng-star-rating';
-const NG_STAR_RATING_ITEM_CLASS = '.ng-star-rating .rating-item';
-const NG_STAR_RATING_CANCEL_CLASS = '.ng-star-rating .rating-cancel';
-const NG_STAR_RATING_LABEL = '.ng-star-rating .rating-label';
-const NG_STAR_RATING_ITEM_ICON_CLASS = '.ng-star-rating .rating-item .rating-item-icon';
+const NG_STAR_RATING_ITEM_CLASS = '.ng-star-rating .ng-rating-item';
+const NG_STAR_RATING_CANCEL_CLASS = '.ng-star-rating .ng-rating-cancel';
+const NG_STAR_RATING_LABEL = '.ng-star-rating .ng-rating-label';
+const NG_STAR_RATING_ITEM_ICON_CLASS = '.ng-star-rating .ng-rating-item .ng-rating-item-icon';
 
 describe('NgRatingComponent', () => {
   let component: NgRatingTestComponent;
@@ -18,12 +18,13 @@ describe('NgRatingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NgRatingModule, FormsModule],
+      imports: [NgRatingModule, FormsModule, ReactiveFormsModule],
       declarations: [
         NgRatingTestComponent,
         NgRatingPreDefinedTestComponent,
         NgRatingReadonlyTestComponent,
         NgRatingControlValueAccessorTestComponent,
+        NgRatingFormControlTestComponent,
       ],
     }).compileComponents();
   }));
@@ -66,7 +67,7 @@ describe('NgRatingComponent', () => {
     });
 
     it('should set rating by clicking on item', () => {
-      spyOn(component.ratingComponent, 'itemClick').and.callThrough();
+      spyOn(component.ratingComponent, 'handleClick').and.callThrough();
 
       let ratingItemElement = fixture.debugElement.queryAll(By.css(NG_STAR_RATING_ITEM_CLASS))[3];
       ratingItemElement.triggerEventHandler('click', null);
@@ -74,7 +75,7 @@ describe('NgRatingComponent', () => {
       const labelElement = fixture.debugElement.query(By.css(NG_STAR_RATING_LABEL)).nativeElement;
 
       expect(component.ratingLabel).toEqual(4);
-      expect(component.ratingComponent.itemClick).toHaveBeenCalledWith(3);
+      expect(component.ratingComponent.handleClick).toHaveBeenCalledWith(3);
       expect(labelElement.innerText).toEqual('4');
 
       ratingItemElement = fixture.debugElement.queryAll(By.css(NG_STAR_RATING_ITEM_CLASS))[4];
@@ -123,12 +124,32 @@ describe('NgRatingComponent', () => {
       expect(component.ratingComponent.showCancelIcon).toBeFalsy();
     });
 
-    // TODO mouseenter/mouseleave
     it('should dispatch mouseleave event', () => {
-      const ratingItemElement = fixture.debugElement.queryAll(By.css(NG_STAR_RATING_ITEM_CLASS))[3];
-      ratingItemElement.triggerEventHandler('mouseenter', null);
+      const ratingItemDebugElement = fixture.debugElement.queryAll(By.css(NG_STAR_RATING_ITEM_CLASS))[3];
+      const ratingComponentDebugElement = fixture.debugElement.query(By.directive(NgRatingComponent));
+      const ratingItemIconDebugElements = fixture.debugElement.queryAll(By.css(NG_STAR_RATING_ITEM_ICON_CLASS));
 
-      ratingItemElement.triggerEventHandler('mouseleave', null);
+      ratingItemDebugElement.triggerEventHandler('mouseenter', null);
+      fixture.detectChanges();
+
+      expect(ratingComponentDebugElement.nativeElement).toBeTruthy();
+
+      ratingItemIconDebugElements.forEach((icon, index) => {
+        const element: Element = icon.nativeElement;
+        if (index <= 3) {
+          expect(element.classList).toContain('ng-rating-item-icon-hover');
+        }
+      });
+
+      ratingComponentDebugElement.triggerEventHandler('mouseleave', null);
+      fixture.detectChanges();
+
+      ratingItemIconDebugElements.forEach((icon, index) => {
+        const element: Element = icon.nativeElement;
+        if (index <= 3) {
+          expect(element.classList).not.toContain('ng-rating-item-icon-hover');
+        }
+      });
     });
 
     it('should throw error if ng rating size is less than zero', () => {
@@ -218,7 +239,7 @@ describe('NgRatingComponent', () => {
     });
   });
 
-  describe('Ng Rating control value accessor', () => {
+  describe('Ng rating using ngModel', () => {
     let cvaFixture: ComponentFixture<NgRatingControlValueAccessorTestComponent>;
     let cvaComponent: NgRatingControlValueAccessorTestComponent;
 
@@ -241,6 +262,41 @@ describe('NgRatingComponent', () => {
       expect(cvaComponent.ratingComponent.rating).toEqual(4);
       expect(writeValueSpy).toHaveBeenCalledWith(4);
     }));
+  });
+
+  describe('Ng rating using form group', () => {
+    let formFixture: ComponentFixture<NgRatingFormControlTestComponent>;
+    let formComponent: NgRatingFormControlTestComponent;
+
+    beforeEach(() => {
+      formFixture = TestBed.createComponent(NgRatingFormControlTestComponent);
+      formComponent = formFixture.componentInstance;
+      formFixture.detectChanges();
+    });
+
+    it('should mark control as touched on blur', () => {
+      const element: DebugElement = formFixture.debugElement.query(By.directive(NgRatingComponent));
+      expect(element.nativeElement.classList).toContain('ng-untouched');
+
+      element.triggerEventHandler('blur', null);
+      formFixture.detectChanges();
+      expect(element.nativeElement.classList).toContain('ng-touched');
+    });
+
+    it('should disabled rating when a control is disabled', () => {
+      const ratingItemDebugElement = formFixture.debugElement.queryAll(By.css(NG_STAR_RATING_ITEM_CLASS))[4];
+
+      expect(formComponent.form.get('ratingControl').disabled).toBeFalsy();
+
+      formComponent.form.disable();
+      formFixture.detectChanges();
+
+      expect(formComponent.form.get('ratingControl').disabled).toBeTruthy();
+      ratingItemDebugElement.triggerEventHandler('click', null);
+      formFixture.detectChanges();
+
+      expect(formComponent.ratingComponent._selectedIndex).toBe(4);
+    });
   });
 
   describe('ng rating keyboard support', () => {
@@ -324,7 +380,7 @@ function createKeyDownEvent(key: string): KeyboardEvent {
 @Component({
   template: `
     <ng-rating [showCancelIcon]="showCancelIcon" (rateChange)="this.ratingLabel = $event" [size]="size">
-      <ng-template ngRatingLabel>{{ this.ratingLabel }}</ng-template>
+      <ng-rating-label>{{ this.ratingLabel }}</ng-rating-label>
     </ng-rating>
   `,
 })
@@ -362,4 +418,25 @@ export class NgRatingControlValueAccessorTestComponent {
   @ViewChild(NgRatingComponent) ratingComponent: NgRatingComponent;
   public size = 6;
   public rating: number;
+}
+
+@Component({
+  template: `
+    <form [formGroup]="form">
+      <ng-rating formControlName="ratingControl" [size]="6"></ng-rating>
+    </form>
+  `,
+})
+export class NgRatingFormControlTestComponent implements OnInit {
+  @ViewChild(NgRatingComponent) ratingComponent: NgRatingComponent;
+  public size = 6;
+  public form: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      ratingControl: [3, Validators.required],
+    });
+  }
 }

@@ -1,8 +1,10 @@
-import { Directive, TemplateRef } from '@angular/core';
+import { Directive, TemplateRef, HostBinding } from '@angular/core';
 
 @Directive({
-  selector: '[ngRatingLabel]',
+  selector: '[ngRatingLabel], ng-rating-label',
 })
 export class NgRatingLabelDirective {
-  constructor(public template: TemplateRef<any>) {}
+  @HostBinding('class.ng-rating-label') get ngRatingLabel(): boolean {
+    return true;
+  }
 }

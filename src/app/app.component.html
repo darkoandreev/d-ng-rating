@@ -1,3 +1,13 @@
+<ng-rating disabled (rateChange)="this.ratingLabel = $event" [size]="6">
+  <ng-rating-label>{{ this.ratingLabel }}</ng-rating-label>
+</ng-rating>
+
+<form [formGroup]="form">
+  <ng-rating [class]="{ 'ng-rating-test': true }" formControlName="ratingControl" [size]="6"></ng-rating>
+</form>
+
 <ng-rating (rateChange)="this.ratingLabel = $event" [size]="6">
-  <ng-template ngRatingLabel>{{ this.ratingLabel }}</ng-template>
+  <ng-template let-hovered="hovered">
+    <span class="star" [class.filled]="hovered">&#9733;</span>
+  </ng-template>
 </ng-rating>

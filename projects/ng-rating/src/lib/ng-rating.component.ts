@@ -10,6 +10,8 @@ import {
   OnChanges,
   SimpleChanges,
   HostListener,
+  ViewEncapsulation,
+  TemplateRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { faStar, faBan, IconDefinition } from '@fortawesome/free-solid-svg-icons';
@@ -31,7 +33,7 @@ export const NG_RATING_VALUE_ACCESSOR: any = {
 /**
  * Rating item model.
  */
-export interface IRating {
+export interface IRatingContext {
   hovered: boolean;
 }
 
@@ -57,12 +59,15 @@ let UNIQUE_ID = 0;
   styleUrls: ['./ng-rating.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [NG_RATING_VALUE_ACCESSOR],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NgRatingComponent implements OnChanges, ControlValueAccessor {
   /** @hidden @internal */
-  public ratings: IRating[];
+  public ratings: IRatingContext[];
 
-  // Currently selected rating item index.
+  /** Currently selected rating item index
+   * @hidden @internal
+   */
   public _selectedIndex = -1;
 
   /** @hidden @internal */
@@ -169,7 +174,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
 
     this._size = coerceNumberProperty(value);
     this.ratings = Array.from(new Array(value)).map(() => {
-      const rating: IRating = {
+      const rating: IRatingContext = {
         hovered: false,
       };
       return rating;
@@ -257,28 +262,6 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
   @Input() public cancelIcon: IconDefinition = faBan;
 
   /**
-   * Gets/sets the `rateStyle`. Custom style for rate item.
-   * By default it uses styles from the component.
-   * @example
-   * ```html
-   * <ng-rating [rateStyle]="{'font-size.px': fontSizeExp}"></ng-rating>
-   * ```
-   * @memberOf NgRatingComponent
-   */
-  @Input() public rateStyle: any;
-
-  /**
-   * Gets/sets the `cancelRateStyle`. Custom style for the cancel (clear) button.
-   * By default it uses styles from the component.
-   * @example
-   * ```html
-   * <ng-rating [cancelRateStyle]="{'font-size.px': fontSizeExp}"></ng-rating>
-   * ```
-   * @memberOf NgRatingComponent
-   */
-  @Input() public cancelRateStyle: any;
-
-  /**
    * An event that is emitted after the rate item is clicked and set.
    * Provides a number of clicked item - ex. 1,2,3, etc.
    * @example
@@ -297,6 +280,22 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    */
   @Output() public rateCancel: EventEmitter<void> = new EventEmitter();
 
+  /**
+   * The template to override the way each star is displayed.
+   *
+   * Alternatively put an `<ng-template>` as the only child of your `<ng-rating>` element
+   * @example
+   * ```html
+   * <ng-rating (rateChange)="this.ratingLabel = $event" [size]="6">
+   *   <ng-template let-hovered="hovered">
+   *    <span class="star" [class.filled]="hovered">&#9733;</span>
+   *   </ng-template>
+   * </ng-rating>
+   * ```
+   */
+  @ContentChild(TemplateRef, { static: false }) ratingTemplateContent: TemplateRef<IRatingContext>;
+  @Input() ratingTemplate: TemplateRef<IRatingContext>;
+
   ngOnChanges(changes: SimpleChanges): void {
     if ('rating' in changes && changes.rating.currentValue > 0) {
       this.ratingsHover(this.rating - 1);
@@ -312,7 +311,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
   }
 
   /** @hidden @internal */
-  public itemClick(index: number): void {
+  public handleClick(index: number): void {
     if (!this.readonly) {
       this.update(index);
     }
@@ -321,7 +320,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
   /** @hidden @internal */
   public cancel(): void {
     this._selectedIndex = -1;
-    this.ratings.forEach((item: IRating) => (item.hovered = false));
+    this.ratings.forEach((item: IRatingContext) => (item.hovered = false));
     this.rateCancel.emit();
   }
 
@@ -329,7 +328,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
   @HostListener('mouseleave')
   public mouseLeave(): void {
     if (!this.readonly) {
-      this.ratings.forEach((item: IRating, index) => (item.hovered = !(index > this._selectedIndex)));
+      this.ratings.forEach((item: IRatingContext, index) => (item.hovered = !(index > this._selectedIndex)));
     }
   }
 
@@ -374,8 +373,6 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
     if (rating) {
       this._controlValueAccessorChangeFn(rating);
       this.rating = rating;
-      console.log(this.rating);
-
       this._selectedIndex = rating - 1;
       this.ratingsHover(rating - 1);
     }
@@ -410,7 +407,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
   private onTouched: () => any = () => {};
 
   private ratingsHover(index: number): void {
-    this.ratings.forEach((item: IRating, i) => (item.hovered = index >= i));
+    this.ratings.forEach((item: IRatingContext, i) => (item.hovered = index >= i));
   }
 
   private get ariaValueText(): string {

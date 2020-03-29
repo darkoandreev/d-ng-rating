@@ -2,24 +2,30 @@
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
-
-.rating-item {
-  border: none;
   outline: none;
-
-  &-icon {
-    font-size: 1.875rem;
-    transition: 0.3s;
-  }
-
-  &-disabled {
-    pointer-events: none;
-    opacity: 0.7;
-  }
 }
 
-.rating {
+.ng-rating {
+  &-item {
+    border: none;
+    outline: none;
+
+    &-icon {
+      font-size: 1.875rem;
+      transition: 0.3s;
+    }
+
+    &-disabled {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    &-icon-hover {
+      color: #ffd700;
+      cursor: pointer;
+    }
+  }
+
   &-cancel {
     border: none;
     outline: none;
@@ -35,14 +41,9 @@
   }
 
   &-label {
-    display: flex;
+    display: inline-flex;
     align-self: center;
     padding-left: 1rem;
     font-size: 1.875rem;
   }
-}
-
-.rating-item-icon-hover {
-  color: #ffd700;
-  cursor: pointer;
 }
