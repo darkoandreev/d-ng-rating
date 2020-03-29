@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-title>{{ cardTitle }}</mat-card-title>
+  <mat-card-subtitle>
+    <mat-tab-group>
+      <mat-tab label="HTML">
+        <div class="docs-wrapper">
+          <pre>{{ htmlCode }}</pre>
+        </div>
+      </mat-tab>
+      <mat-tab label="TS">
+        <div class="docs-wrapper">
+          <pre>{{ typescriptCode }}</pre>
+        </div>
+      </mat-tab>
+      <mat-tab label="SCSS">
+        <div class="docs-wrapper">
+          <pre>{{ cssCode }}</pre>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-subtitle>
+  <ng-content></ng-content>
+</mat-card>

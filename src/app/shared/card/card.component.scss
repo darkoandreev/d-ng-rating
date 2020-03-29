@@ -1,0 +1,11 @@
+.docs-wrapper {
+  min-height: 100px;
+}
+
+mat-card {
+  margin-bottom: 2%;
+
+  mat-card-subtitle {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}

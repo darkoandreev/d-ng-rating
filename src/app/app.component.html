@@ -1,13 +1,9 @@
-<ng-rating disabled (rateChange)="this.ratingLabel = $event" [size]="6">
-  <ng-rating-label>{{ this.ratingLabel }}</ng-rating-label>
-</ng-rating>
+<main fxLayout="column" fxFlexFill>
+  <app-header></app-header>
 
-<form [formGroup]="form">
-  <ng-rating [class]="{ 'ng-rating-test': true }" formControlName="ratingControl" [size]="6"></ng-rating>
-</form>
+  <router-outlet></router-outlet>
 
-<ng-rating (rateChange)="this.ratingLabel = $event" [size]="6">
-  <ng-template let-hovered="hovered">
-    <span class="star" [class.filled]="hovered">&#9733;</span>
-  </ng-template>
-</ng-rating>
+  <mat-toolbar fxFlexOffset="auto" color="primary">
+    <app-footer class="main-footer"></app-footer>
+  </mat-toolbar>
+</main>
