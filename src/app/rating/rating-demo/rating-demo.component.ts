@@ -26,7 +26,12 @@ export class RatingDemoComponent implements OnInit {
   `;
 
   fourthSnippet = `
-<ng-rating showCancelIcon (rateChange)="this.ratingLabel = $event" (rateCancel)="this.ratingLabel = null" [size]="6">
+<ng-rating 
+  showCancelIcon 
+  (rateChange)="this.ratingLabel = $event" 
+  (rateCancel)="this.ratingLabel = null" 
+  [size]="6"
+>
   <ng-rating-label>{{ this.ratingLabel }}</ng-rating-label>
 </ng-rating>
   `;
