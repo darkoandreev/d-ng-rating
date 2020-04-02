@@ -3,16 +3,25 @@
   <mat-card-subtitle>
     <mat-tab-group>
       <mat-tab label="HTML">
+        <button mat-icon-button ngxClipboard [cbContent]="htmlCode">
+          <mat-icon>content_copy</mat-icon>
+        </button>
         <div class="docs-wrapper">
           <pre>{{ htmlCode }}</pre>
         </div>
       </mat-tab>
       <mat-tab label="TS">
+        <button mat-icon-button ngxClipboard [cbContent]="typescriptCode">
+          <mat-icon>content_copy</mat-icon>
+        </button>
         <div class="docs-wrapper">
           <pre>{{ typescriptCode }}</pre>
         </div>
       </mat-tab>
       <mat-tab label="SCSS">
+        <button mat-icon-button ngxClipboard [cbContent]="cssCode">
+          <mat-icon>content_copy</mat-icon>
+        </button>
         <div class="docs-wrapper">
           <pre>{{ cssCode }}</pre>
         </div>

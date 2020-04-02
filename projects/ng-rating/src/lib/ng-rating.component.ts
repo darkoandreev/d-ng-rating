@@ -237,7 +237,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
   public set showCancelIcon(value: boolean) {
     this._showCancelIcon = coerceBooleanProperty(value);
   }
-  private _showCancelIcon = true;
+  private _showCancelIcon = false;
 
   /**
    * Gets/sets the `icon` for the rate item.

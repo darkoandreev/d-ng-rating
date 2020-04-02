@@ -7,5 +7,16 @@ mat-card {
 
   mat-card-subtitle {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    button {
+      position: absolute;
+      right: 0;
+      visibility: hidden;
+    }
+
+    &:hover button {
+      cursor: pointer;
+      visibility: visible;
+    }
   }
 }

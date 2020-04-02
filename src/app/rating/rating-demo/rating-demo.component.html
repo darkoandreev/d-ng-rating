@@ -1,28 +1,67 @@
-<app-card cardTitle="Basic rating" [htmlCode]="firstSnippet">
+<app-card
+  cardTitle="Basic rating"
+  [htmlCode]="firstSnippet"
+  [typescriptCode]="basicRatingTypescript"
+  cssCode="No CSS for this example"
+>
   <ng-rating [size]="6"></ng-rating>
 </app-card>
 
-<app-card cardTitle="Basic rating with label" [htmlCode]="fourthSnippet">
-  <ng-rating (rateChange)="this.ratingLabel = $event" [size]="6">
+<app-card
+  cardTitle="Basic rating with label"
+  [htmlCode]="fourthSnippet"
+  [typescriptCode]="basicRatingLabelTypescript"
+  cssCode="No CSS for this example"
+>
+  <ng-rating showCancelIcon (rateChange)="this.ratingLabel = $event" (rateCancel)="this.ratingLabel = null" [size]="6">
     <ng-rating-label>{{ this.ratingLabel }}</ng-rating-label>
   </ng-rating>
 </app-card>
 
-<app-card cardTitle="Form rating" [htmlCode]="secondSnippet">
+<app-card
+  cardTitle="Form rating"
+  [htmlCode]="secondSnippet"
+  [typescriptCode]="ratingFormTypescript"
+  cssCode="No CSS for this example"
+>
   <form [formGroup]="form">
     <ng-rating formControlName="ratingControl" [size]="6"></ng-rating>
   </form>
 </app-card>
 
-<app-card cardTitle="Disabled rating" [htmlCode]="thirdSnippet">
+<app-card
+  cardTitle="Disabled rating"
+  [htmlCode]="thirdSnippet"
+  [typescriptCode]="disabledRatingTypescript"
+  cssCode="No CSS for this example"
+>
   <ng-rating disabled [size]="6"></ng-rating>
 </app-card>
 
-<app-card cardTitle="Readonly rating" [htmlCode]="fifthSnippet">
+<app-card
+  cardTitle="Readonly rating"
+  [htmlCode]="fifthSnippet"
+  [typescriptCode]="readonlyRatingTypescript"
+  cssCode="No CSS for this example"
+>
   <ng-rating readonly [rating]="rating" [size]="6"></ng-rating>
 </app-card>
 
-<app-card cardTitle="Custom template rating" [htmlCode]="sixthSnippet">
+<app-card
+  cardTitle="Cancelable rating"
+  [htmlCode]="cancelableRatingHtml"
+  [typescriptCode]="cancelableRatingTypescript"
+  cssCode="No CSS for this example"
+>
+  <ng-rating showCancelIcon [size]="6"></ng-rating>
+</app-card>
+
+<app-card
+  cardTitle="Custom template rating"
+  [htmlCode]="sixthSnippet"
+  [typescriptCode]="customTemplateRatingTypescript"
+  [cssCode]="customTeplateCssSnippet"
+>
   <ng-rating (rateChange)="this.ratingLabel = $event" [size]="6">
     <ng-template let-hovered="hovered">
       <span class="star" [class.filled]="hovered">&#9733;</span>
