@@ -5,10 +5,15 @@
   outline: none;
 }
 
+@mixin clear-item {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
 .ng-rating {
   &-item {
-    border: none;
-    outline: none;
+    @include clear-item();
 
     &-icon {
       font-size: 1.875rem;
@@ -27,8 +32,7 @@
   }
 
   &-cancel {
-    border: none;
-    outline: none;
+    @include clear-item();
 
     fa-icon {
       font-size: 1.875rem;

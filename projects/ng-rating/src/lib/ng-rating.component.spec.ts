@@ -234,7 +234,7 @@ describe('NgRatingComponent', () => {
       expect(ratingElement.nativeElement.getAttribute('aria-disabled')).toEqual('true');
       ratingItemElements.forEach((debugElement) => {
         const element: Element = debugElement.nativeElement;
-        expect(element.classList).toContain('rating-item-disabled');
+        expect(element.classList).toContain('ng-rating-item-disabled');
       });
     });
   });
