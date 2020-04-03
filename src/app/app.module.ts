@@ -7,6 +7,7 @@ import { RatingModule } from './rating/rating.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from './shared/shared.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     AppRoutingModule,
     BrowserAnimationsModule,
     RatingModule,
+    MarkdownModule.forRoot(),
   ],
   bootstrap: [AppComponent],
 })

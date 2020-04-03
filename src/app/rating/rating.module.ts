@@ -6,9 +6,11 @@ import { RatingApiComponent } from './rating-api/rating-api.component';
 import { RatingRoutingModule } from './rating-routing.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
-import { NgRatingModule } from 'projects/ng-rating/src/public-api';
+import { NgRatingModule } from '@ng-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { MarkdownModule } from 'ngx-markdown';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [RatingComponent, RatingDemoComponent, RatingApiComponent],
@@ -21,6 +23,8 @@ import { SharedModule } from '../shared/shared.module';
     MatTabsModule,
     MatCardModule,
     NgRatingModule,
+    HttpClientModule,
+    MarkdownModule,
   ],
 })
 export class RatingModule {}

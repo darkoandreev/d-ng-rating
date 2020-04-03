@@ -1,11 +1,29 @@
 {
   "name": "ng-rating",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": {
     "name": "Darko Andreev",
     "email": "andreev.darko@gmail.com",
     "url": "https://github.com/darkoandreev"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darkoandreev/ng-rating"
+  },
+  "bugs": {
+    "url": "https://github.com/darkoandreev/ng-rating/issues"
+  },
+  "homepage": "https://darkoandreev.github.io/ng-rating/",
+  "keywords": [
+    "angular",
+    "typescript",
+    "rating",
+    "star rating",
+    "star",
+    "rate component",
+    "ng rating"
+  ],
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^9.0.6",
     "@angular/core": "^9.0.6",

@@ -1,6 +1,6 @@
 {
   "name": "ng-rating",
-  "version": "0.0.0",
+  "version": "1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -32,6 +32,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "ngx-clipboard": "^13.0.0",
+    "ngx-markdown": "^9.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

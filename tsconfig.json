@@ -11,18 +11,11 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "angular9-rating": [
-        "dist/ng-rating/angular9-rating",
-        "dist/ng-rating"
-      ]
+      "@ng-rating/dist": ["dist/ng-rating/angular9-rating", "dist/ng-rating"],
+      "@ng-rating": ["./projects/ng-rating/src/public-api"]
     }
   },
   "angularCompilerOptions": {

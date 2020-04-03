@@ -180,7 +180,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
       return rating;
     });
   }
-  private _size: number;
+  private _size = 5;
 
   /**
    * Gets/sets the `readonly` property.
@@ -293,6 +293,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * </ng-rating>
    * ```
    */
+
   @ContentChild(TemplateRef, { static: false }) ratingTemplateContent: TemplateRef<IRatingContext>;
   @Input() ratingTemplate: TemplateRef<IRatingContext>;
 
