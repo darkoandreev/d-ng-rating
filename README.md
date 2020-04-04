@@ -10,7 +10,6 @@ Please check rating component in action at http://darkoandreev.github.io/d-ng-ra
 
 You need to have an Angular project with the supported Angular version. We strongly recommend using Angular CLI for this.
 
-You also need to add FontAwesome angular package to your application. The package can be foung [HERE](https://www.npmjs.com/package/@fortawesome/angular-fontawesome)
 
 After installing the above dependencies, install **d-ng-rating** via:
 
@@ -31,6 +30,13 @@ import { NgRatingModule } from 'd-ng-rating';
 export class YourAppModule {
 }
 ```
+**NOTE** There are few more packages that are dependencies of the library.
+
+### Dependecies
+- @fortawesome/angular-fontawesome
+- @fortawesome/fontawesome-svg-core
+- @fortawesome/free-solid-svg-icons
+- @angular/cdk
 
 See more details in the [official documentation](https://github.com/darkoandreev/d-ng-rating/blob/master/projects/d-ng-rating/README.md)
 
