@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./rating-api.component.scss'],
 })
 export class RatingApiComponent {
-  readonly docPath: string = '/docs/ng-rating.md';
+  readonly docPath: string = 'assets/docs/ng-rating.md';
 }

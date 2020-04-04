@@ -18,7 +18,7 @@ import { faStar, faBan, IconDefinition } from '@fortawesome/free-solid-svg-icons
 import { RATING_SIZE_ERROR, RATE_SET_ERROR } from './ng-rating.error';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { NgRatingLabelDirective } from './ng-rating-label.directive';
-import { Key } from '../util/key';
+import { Key } from './util/key';
 
 /**
  * Provider that allows the rating component to register as a ControlValueAccessor.

@@ -2,7 +2,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "paths": {
+      "@d-ng-rating/dist": ["dist/d-ng-rating"],
+      "@d-ng-rating/d-ng-rating": ["./projects/d-ng-rating/src/public-api"]
+    }
   },
   "files": [
     "src/main.ts",

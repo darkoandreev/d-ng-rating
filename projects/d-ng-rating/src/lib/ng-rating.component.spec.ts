@@ -4,7 +4,7 @@ import { Component, ViewChild, DebugElement, OnInit } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NgRatingModule } from './ng-rating.module';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Key } from '../util/key';
+import { Key } from './util/key';
 
 const NG_STAR_RATING_CLASS = '.ng-star-rating';
 const NG_STAR_RATING_ITEM_CLASS = '.ng-star-rating .d-ng-rating-item';
