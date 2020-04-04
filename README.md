@@ -1,29 +1,38 @@
 [![Build Status](https://travis-ci.com/darkoandreev/d-ng-rating.svg?token=dyC7xCjKChVxFuxWSFtn&branch=master)](https://travis-ci.com/darkoandreev/d-ng-rating)
 
-# AngularRating
+# Rating - Angular powered rating library
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+## Demo
 
-## Development server
+Please check rating component in action at http://darkoandreev.github.io/d-ng-rating
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+You need to have an Angular project with the supported Angular version. We strongly recommend using Angular CLI for this.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+You also need to add FontAwesome angular package to your application. The package can be foung [HERE](https://www.npmjs.com/package/@fortawesome/angular-fontawesome)
 
-## Build
+After installing the above dependencies, install **d-ng-rating** via:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```html
+npm install --save @d-ng-rating/d-ng-rating
+```
 
-## Running unit tests
+Once installed you need to import our main module:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```html
+import { NgRatingModule } from '@d-ng-rating/d-ng-rating'; @NgModule({ ... imports: [NgRatingModule, ...], ... }) export
+class YourAppModule { }
+```
 
-## Running end-to-end tests
+See more details in the [official documentation](https://github.com/darkoandreev/d-ng-rating/blob/master/projects/d-ng-rating/README.md)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Supported browsers
 
-## Further help
+We support the same browsers and versions supported by Angular, whichever is more restrictive. See Angular browser support for more details, but on the high-level it should be something like:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Chrome (45+)
+Firefox (40+)
+IE (10+)
+Edge (20+)
+Safari (7+)

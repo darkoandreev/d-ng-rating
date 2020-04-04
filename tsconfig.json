@@ -15,7 +15,7 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "@d-ng-rating/dist": ["dist/d-ng-rating/angular9-rating", "dist/d-ng-rating"],
-      "@d-ng-rating": ["./projects/d-ng-rating/src/public-api"]
+      "@d-ng-rating/d-ng-rating": ["./projects/d-ng-rating/src/public-api"]
     }
   },
   "angularCompilerOptions": {
