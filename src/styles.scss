@@ -10,6 +10,12 @@ body {
 }
 
 markdown {
+  font-size: 1.1rem;
+
+  li {
+    padding-bottom: 8px;
+  }
+
   table {
     border-collapse: collapse;
     border-radius: 2px;
