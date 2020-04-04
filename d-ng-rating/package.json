@@ -1,0 +1,45 @@
+{
+  "name": "d-ng-rating",
+  "version": "1.0.0",
+  "author": {
+    "name": "Darko Andreev",
+    "email": "andreev.darko@gmail.com",
+    "url": "https://github.com/darkoandreev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darkoandreev/d-ng-rating"
+  },
+  "bugs": {
+    "url": "https://github.com/darkoandreev/d-ng-rating/issues"
+  },
+  "homepage": "https://darkoandreev.github.io/d-ng-rating/",
+  "keywords": [
+    "angular",
+    "typescript",
+    "rating",
+    "star rating",
+    "star",
+    "rate component",
+    "ng rating"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^9.0.6",
+    "@angular/core": "^9.0.6",
+    "tslib": "^1.10.0",
+    "@fortawesome/angular-fontawesome": "^0.6.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1"
+  },
+  "main": "bundles/d-ng-rating.umd.js",
+  "module": "fesm5/d-ng-rating.js",
+  "es2015": "fesm2015/d-ng-rating.js",
+  "esm5": "esm5/d-ng-rating.js",
+  "esm2015": "esm2015/d-ng-rating.js",
+  "fesm5": "fesm5/d-ng-rating.js",
+  "fesm2015": "fesm2015/d-ng-rating.js",
+  "typings": "d-ng-rating.d.ts",
+  "metadata": "d-ng-rating.metadata.json",
+  "sideEffects": false
+}

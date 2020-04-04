@@ -1,0 +1,8 @@
+/*
+ * Public API Surface of ng-rating
+ */
+export * from './lib/ng-rating.component';
+export * from './lib/ng-rating.error';
+export * from './lib/ng-rating.module';
+export * from './lib/ng-rating-label.directive';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL25nLXJhdGluZy8iLCJzb3VyY2VzIjpbInB1YmxpYy1hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0dBRUc7QUFFSCxjQUFjLDJCQUEyQixDQUFDO0FBQzFDLGNBQWMsdUJBQXVCLENBQUM7QUFDdEMsY0FBYyx3QkFBd0IsQ0FBQztBQUN2QyxjQUFjLGlDQUFpQyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBuZy1yYXRpbmdcbiAqL1xuXG5leHBvcnQgKiBmcm9tICcuL2xpYi9uZy1yYXRpbmcuY29tcG9uZW50JztcbmV4cG9ydCAqIGZyb20gJy4vbGliL25nLXJhdGluZy5lcnJvcic7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9uZy1yYXRpbmcubW9kdWxlJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL25nLXJhdGluZy1sYWJlbC5kaXJlY3RpdmUnO1xuIl19
