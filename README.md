@@ -20,9 +20,16 @@ npm install --save @d-ng-rating/d-ng-rating
 
 Once installed you need to import our main module:
 
-```html
-import { NgRatingModule } from '@d-ng-rating/d-ng-rating'; @NgModule({ ... imports: [NgRatingModule, ...], ... }) export
-class YourAppModule { }
+```javascript
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+@NgModule({
+  ...
+  imports: [NgbModule, ...],
+  ...
+})
+export class YourAppModule {
+}
 ```
 
 See more details in the [official documentation](https://github.com/darkoandreev/d-ng-rating/blob/master/projects/d-ng-rating/README.md)
