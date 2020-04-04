@@ -1,7 +1,3 @@
-[![Build Status](https://travis-ci.com/darkoandreev/d-ng-rating.svg?token=dyC7xCjKChVxFuxWSFtn&branch=master)](https://travis-ci.com/darkoandreev/d-ng-rating)
-
-[![codecov](https://codecov.io/gh/darkoandreev/d-ng-rating/branch/master/graph/badge.svg?token=X970X32DCF)](https://codecov.io/gh/darkoandreev/d-ng-rating)
-
 ## Overview
 
 Rating is Angular component that helps visualising and interacting with a star rating bar.
@@ -116,6 +112,12 @@ Selector: d-ng-rating
 In order to use our rating star and cancel icons you will need to install **@fortawesome/angular-fontawesome** package as
 peer dependency. You can find this npm package [HERE](https://www.npmjs.com/package/@fortawesome/angular-fontawesome).
 If you want to use your own custom rating template, then you don't need to install the peer dependency.
+
+#### List of dependencies:
+- @fortawesome/angular-fontawesome
+- @fortawesome/fontawesome-svg-core
+- @fortawesome/free-solid-svg-icons
+- @angular/cdk
 
 ### Interfaces
 
