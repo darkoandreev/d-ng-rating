@@ -21,7 +21,7 @@ npm install --save @d-ng-rating/d-ng-rating
 Once installed you need to import our main module:
 
 ```javascript
-import { NgRatingModule } from '@d-ng-rating/d-ng-rating';
+import { NgRatingModule } from 'd-ng-rating';
 
 @NgModule({
   ...
