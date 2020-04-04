@@ -82,7 +82,7 @@ Please find the related API below.
 ### Reference
 
 ```javascript
-import { NgRatingModule } from '@d-ng-rating/d-ng-rating';
+import { NgRatingModule } from 'd-ng-rating';
 ```
 
 ### NgRatingComponent
@@ -112,6 +112,12 @@ Selector: d-ng-rating
 In order to use our rating star and cancel icons you will need to install **@fortawesome/angular-fontawesome** package as
 peer dependency. You can find this npm package [HERE](https://www.npmjs.com/package/@fortawesome/angular-fontawesome).
 If you want to use your own custom rating template, then you don't need to install the peer dependency.
+
+#### List of dependencies:
+- @fortawesome/angular-fontawesome
+- @fortawesome/fontawesome-svg-core
+- @fortawesome/free-solid-svg-icons
+- @angular/cdk
 
 ### Interfaces
 

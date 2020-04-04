@@ -113,6 +113,12 @@ In order to use our rating star and cancel icons you will need to install **@for
 peer dependency. You can find this npm package [HERE](https://www.npmjs.com/package/@fortawesome/angular-fontawesome).
 If you want to use your own custom rating template, then you don't need to install the peer dependency.
 
+#### List of dependencies:
+- @fortawesome/angular-fontawesome
+- @fortawesome/fontawesome-svg-core
+- @fortawesome/free-solid-svg-icons
+- @angular/cdk
+
 ### Interfaces
 
 #### IRatingContext
