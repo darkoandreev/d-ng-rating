@@ -28,7 +28,7 @@
               "src/assets",
               {
                 "glob": "**/*.md",
-                "input": "projects/ng-rating/src/lib/",
+                "input": "projects/d-ng-rating/src/lib/",
                 "output": "/docs/"
               }
             ],
@@ -124,37 +124,37 @@
         }
       }
     },
-    "ng-rating": {
+    "d-ng-rating": {
       "projectType": "library",
-      "root": "projects/ng-rating",
-      "sourceRoot": "projects/ng-rating/src",
+      "root": "projects/d-ng-rating",
+      "sourceRoot": "projects/d-ng-rating/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/ng-rating/tsconfig.lib.json",
-            "project": "projects/ng-rating/ng-package.json"
+            "tsConfig": "projects/d-ng-rating/tsconfig.lib.json",
+            "project": "projects/d-ng-rating/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ng-rating/tsconfig.lib.prod.json"
+              "tsConfig": "projects/d-ng-rating/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ng-rating/src/test.ts",
-            "tsConfig": "projects/ng-rating/tsconfig.spec.json",
-            "karmaConfig": "projects/ng-rating/karma.conf.js",
+            "main": "projects/d-ng-rating/src/test.ts",
+            "tsConfig": "projects/d-ng-rating/tsconfig.spec.json",
+            "karmaConfig": "projects/d-ng-rating/karma.conf.js",
             "codeCoverage": true
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["projects/ng-rating/tsconfig.lib.json", "projects/ng-rating/tsconfig.spec.json"],
+            "tsConfig": ["projects/d-ng-rating/tsconfig.lib.json", "projects/d-ng-rating/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         }

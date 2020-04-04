@@ -46,15 +46,15 @@ let UNIQUE_ID = 0;
  * For example, if the user clicks on the third star from the left, the rating of the item is 3 of 5 stars.
  * ```
  * @example
- * <ng-rating [input bindings]>
+ * <d-ng-rating [input bindings]>
  *  <ng-template ngRatingLabel>{{ this.ratingLabel }}</ng-template>
- * </ng-rating>
+ * </d-ng-rating>
  * ```
  *
  * @export
  */
 @Component({
-  selector: 'ng-rating',
+  selector: 'd-ng-rating',
   templateUrl: './ng-rating.component.html',
   styleUrls: ['./ng-rating.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -138,7 +138,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * Determines selected rate items.
    * @example
    * ```html
-   * <ng-rating [rating]="5"></ng-rating>
+   * <d-ng-rating [rating]="5"></d-ng-rating>
    * ```
    * @memberOf NgRatingComponent
    */
@@ -159,7 +159,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * Sets max number of rate items.
    * @example
    * ```html
-   * <ng-rating [size]="5"></ng-rating>
+   * <d-ng-rating [size]="5"></d-ng-rating>
    * ```
    * @memberOf NgRatingComponent
    */
@@ -188,7 +188,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * By default it's **false**.
    * @example
    * ```html
-   * <ng-rating readonly></ng-rating>
+   * <d-ng-rating readonly></d-ng-rating>
    * ```
    * @memberOf NgRatingComponent
    */
@@ -207,7 +207,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * By default rate items are clickable (disabled=false).
    * @example
    * ```html
-   * <ng-rating disabled></ng-rating>
+   * <d-ng-rating disabled></d-ng-rating>
    * ```
    * @memberOf NgRatingComponent
    */
@@ -226,7 +226,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * By default it's visible.
    * @example
    * ```html
-   * <ng-rating [showCancelIcon]="false"></ng-rating>
+   * <d-ng-rating [showCancelIcon]="false"></d-ng-rating>
    * ```
    * @memberOf NgRatingComponent
    */
@@ -244,7 +244,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * By default it's **faStar** FontAwesome icon.
    * @example
    * ```html
-   * <ng-rating [icon]="faStar"></ng-rating>
+   * <d-ng-rating [icon]="faStar"></d-ng-rating>
    * ```
    * @memberOf NgRatingComponent
    */
@@ -255,7 +255,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * By default it uses **faBan** FontAwesome icon.
    * @example
    * ```html
-   * <ng-rating [cancelIcon]="faBan"></ng-rating>
+   * <d-ng-rating [cancelIcon]="faBan"></d-ng-rating>
    * ```
    * @memberOf NgRatingComponent
    */
@@ -266,7 +266,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * Provides a number of clicked item - ex. 1,2,3, etc.
    * @example
    * ```html
-   * <ng-rating [rateChange]="change($event)"></ng-rating>
+   * <d-ng-rating [rateChange]="change($event)"></d-ng-rating>
    * ```
    */
   @Output() public rateChange: EventEmitter<number> = new EventEmitter();
@@ -275,7 +275,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * An event that is emitted after the rating is canceled (cleared).
    * @example
    * ```html
-   * <ng-rating [rateCancel]="cancel($event)"></ng-rating>
+   * <d-ng-rating [rateCancel]="cancel($event)"></d-ng-rating>
    * ```
    */
   @Output() public rateCancel: EventEmitter<void> = new EventEmitter();
@@ -283,14 +283,14 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
   /**
    * The template to override the way each star is displayed.
    *
-   * Alternatively put an `<ng-template>` as the only child of your `<ng-rating>` element
+   * Alternatively put an `<ng-template>` as the only child of your `<d-ng-rating>` element
    * @example
    * ```html
-   * <ng-rating (rateChange)="this.ratingLabel = $event" [size]="6">
+   * <d-ng-rating (rateChange)="this.ratingLabel = $event" [size]="6">
    *   <ng-template let-hovered="hovered">
    *    <span class="star" [class.filled]="hovered">&#9733;</span>
    *   </ng-template>
-   * </ng-rating>
+   * </d-ng-rating>
    * ```
    */
 

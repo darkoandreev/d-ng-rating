@@ -11,7 +11,7 @@ Rating is Angular component that helps visualising and interacting with a star r
 In order to create a rating component, we simply have to define it in our component's template:
 
 ```html
-<ng-rating [size]="6"></ng-rating>
+<d-ng-rating [size]="6"></d-ng-rating>
 ```
 
 We need to define size of our rating items and we can do it by defining **size** mandatory property.
@@ -21,9 +21,9 @@ We need to define size of our rating items and we can do it by defining **size**
 We can define rating result label that shows clicked rate item.
 
 ```html
-<ng-rating showCancelIcon (rateChange)="this.ratingLabel = $event" (rateCancel)="this.ratingLabel = null" [size]="6">
-  <ng-rating-label>{{ this.ratingLabel }}</ng-rating-label>
-</ng-rating>
+<d-ng-rating showCancelIcon (rateChange)="this.ratingLabel = $event" (rateCancel)="this.ratingLabel = null" [size]="6">
+  <d-ng-rating-label>{{ this.ratingLabel }}</d-ng-rating-label>
+</d-ng-rating>
 ```
 
 ### Using form
@@ -33,7 +33,7 @@ sumibssion of the form before rating is completed.
 
 ```html
 <form [formGroup]="form">
-  <ng-rating formControlName="ratingControl" [size]="6"></ng-rating>
+  <d-ng-rating formControlName="ratingControl" [size]="6"></d-ng-rating>
 </form>
 ```
 
@@ -44,13 +44,13 @@ For example, we can cancel our rating if we rate wrong.
 We can change rating cancel icon by using [FontAwesome icons](https://www.npmjs.com/package/@fortawesome/angular-fontawesome) and input property **cancelIcon**.
 
 ```html
-<ng-rating showCancelIcon [size]="6"></ng-rating>
+<d-ng-rating showCancelIcon [size]="6"></d-ng-rating>
 ```
 
 OR
 
 ```html
-<ng-rating [showCancelIcon]="true" [size]="6"></ng-rating>
+<d-ng-rating [showCancelIcon]="true" [size]="6"></d-ng-rating>
 ```
 
 ### Custom template
@@ -59,11 +59,11 @@ In order to use your own rating template, you can define it by using **ng-templa
 Inside the template virtual element you need to define your rating item element and styling (item color, hovered item color).
 
 ```html
-<ng-rating (rateChange)="this.ratingLabel = $event" [size]="6">
+<d-ng-rating (rateChange)="this.ratingLabel = $event" [size]="6">
   <ng-template let-hovered="hovered">
     <span class="star" [class.filled]="hovered">&#9733;</span>
   </ng-template>
-</ng-rating>
+</d-ng-rating>
 ```
 
 ### Keyboard interaction
@@ -82,13 +82,13 @@ Please find the related API below.
 ### Reference
 
 ```javascript
-import { NgratingModule } from '@ng-rating';
+import { NgratingModule } from '@d-ng-rating';
 ```
 
 ### NgRatingComponent
 
 ```html
-Selector: ng-rating
+Selector: d-ng-rating
 ```
 
 | Property                  | Type                        | Description                                                      | Default value     |

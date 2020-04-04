@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/darkoandreev/ng-rating.svg?token=dyC7xCjKChVxFuxWSFtn&branch=master)](https://travis-ci.com/darkoandreev/ng-rating)
+[![Build Status](https://travis-ci.com/darkoandreev/d-ng-rating.svg?token=dyC7xCjKChVxFuxWSFtn&branch=master)](https://travis-ci.com/darkoandreev/d-ng-rating)
 
 # AngularRating
 

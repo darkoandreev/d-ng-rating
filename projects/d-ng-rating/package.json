@@ -1,5 +1,5 @@
 {
-  "name": "ng-rating",
+  "name": "d-ng-rating",
   "version": "1.0.0",
   "author": {
     "name": "Darko Andreev",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/darkoandreev/ng-rating"
+    "url": "https://github.com/darkoandreev/d-ng-rating"
   },
   "bugs": {
-    "url": "https://github.com/darkoandreev/ng-rating/issues"
+    "url": "https://github.com/darkoandreev/d-ng-rating/issues"
   },
-  "homepage": "https://darkoandreev.github.io/ng-rating/",
+  "homepage": "https://darkoandreev.github.io/d-ng-rating/",
   "keywords": [
     "angular",
     "typescript",

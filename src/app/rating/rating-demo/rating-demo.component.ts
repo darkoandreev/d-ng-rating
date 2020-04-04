@@ -13,38 +13,38 @@ export class RatingDemoComponent implements OnInit {
   ratingLabel: string;
 
   firstSnippet = `
-<ng-rating [size]="6"></ng-rating>
+<d-ng-rating [size]="6"></d-ng-rating>
 `;
 
   secondSnippet = `
 <form [formGroup]="form">
-  <ng-rating formControlName="ratingControl" [size]="6"></ng-rating>
+  <d-ng-rating formControlName="ratingControl" [size]="6"></d-ng-rating>
 </form>
   `;
   thirdSnippet = `
-<ng-rating disabled [size]="6"></ng-rating>
+<d-ng-rating disabled [size]="6"></d-ng-rating>
   `;
 
   fourthSnippet = `
-<ng-rating 
+<d-ng-rating 
   showCancelIcon 
   (rateChange)="this.ratingLabel = $event" 
   (rateCancel)="this.ratingLabel = null" 
   [size]="6"
 >
-  <ng-rating-label>{{ this.ratingLabel }}</ng-rating-label>
-</ng-rating>
+  <d-ng-rating-label>{{ this.ratingLabel }}</d-ng-rating-label>
+</d-ng-rating>
   `;
   fifthSnippet = `
-<ng-rating readonly [rating]="rating" [size]="6"></ng-rating>
+<d-ng-rating readonly [rating]="rating" [size]="6"></d-ng-rating>
   `;
 
   sixthSnippet = `
-<ng-rating (rateChange)="this.ratingLabel = $event" [size]="6">
+<d-ng-rating (rateChange)="this.ratingLabel = $event" [size]="6">
   <ng-template let-hovered="hovered">
     <span class="star" [class.filled]="hovered">&#9733;</span>
   </ng-template>
-</ng-rating> 
+</d-ng-rating> 
   `;
 
   customTeplateCssSnippet = `
@@ -155,7 +155,7 @@ export class NgRatingTemplateOverviewExample {
 }`;
 
   cancelableRatingHtml = `
-<ng-rating showCancelIcon [size]="6"></ng-rating>
+<d-ng-rating showCancelIcon [size]="6"></d-ng-rating>
 `;
   cancelableRatingTypescript = `
 import {Component} from '@angular/core';

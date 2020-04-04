@@ -7,10 +7,10 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { Key } from '../util/key';
 
 const NG_STAR_RATING_CLASS = '.ng-star-rating';
-const NG_STAR_RATING_ITEM_CLASS = '.ng-star-rating .ng-rating-item';
-const NG_STAR_RATING_CANCEL_CLASS = '.ng-star-rating .ng-rating-cancel';
-const NG_STAR_RATING_LABEL = '.ng-star-rating .ng-rating-label';
-const NG_STAR_RATING_ITEM_ICON_CLASS = '.ng-star-rating .ng-rating-item .ng-rating-item-icon';
+const NG_STAR_RATING_ITEM_CLASS = '.ng-star-rating .d-ng-rating-item';
+const NG_STAR_RATING_CANCEL_CLASS = '.ng-star-rating .d-ng-rating-cancel';
+const NG_STAR_RATING_LABEL = '.ng-star-rating .d-ng-rating-label';
+const NG_STAR_RATING_ITEM_ICON_CLASS = '.ng-star-rating .d-ng-rating-item .d-ng-rating-item-icon';
 
 describe('NgRatingComponent', () => {
   let component: NgRatingTestComponent;
@@ -137,7 +137,7 @@ describe('NgRatingComponent', () => {
       ratingItemIconDebugElements.forEach((icon, index) => {
         const element: Element = icon.nativeElement;
         if (index <= 3) {
-          expect(element.classList).toContain('ng-rating-item-icon-hover');
+          expect(element.classList).toContain('d-ng-rating-item-icon-hover');
         }
       });
 
@@ -147,7 +147,7 @@ describe('NgRatingComponent', () => {
       ratingItemIconDebugElements.forEach((icon, index) => {
         const element: Element = icon.nativeElement;
         if (index <= 3) {
-          expect(element.classList).not.toContain('ng-rating-item-icon-hover');
+          expect(element.classList).not.toContain('d-ng-rating-item-icon-hover');
         }
       });
     });
@@ -174,7 +174,7 @@ describe('NgRatingComponent', () => {
       expect(preDefinedComponent).toBeTruthy();
     });
 
-    it('should pre-define rating for ng-rating component', () => {
+    it('should pre-define rating for d-ng-rating component', () => {
       expect(preDefinedComponent.rating).toBe(3);
       const rating = spyOnProperty(preDefinedComponent.ratingComponent, 'rating', 'set').and.callThrough();
       preDefinedComponent.rating = 5;
@@ -234,7 +234,7 @@ describe('NgRatingComponent', () => {
       expect(ratingElement.nativeElement.getAttribute('aria-disabled')).toEqual('true');
       ratingItemElements.forEach((debugElement) => {
         const element: Element = debugElement.nativeElement;
-        expect(element.classList).toContain('ng-rating-item-disabled');
+        expect(element.classList).toContain('d-ng-rating-item-disabled');
       });
     });
   });
@@ -379,9 +379,9 @@ function createKeyDownEvent(key: string): KeyboardEvent {
 
 @Component({
   template: `
-    <ng-rating [showCancelIcon]="showCancelIcon" (rateChange)="this.ratingLabel = $event" [size]="size">
-      <ng-rating-label>{{ this.ratingLabel }}</ng-rating-label>
-    </ng-rating>
+    <d-ng-rating [showCancelIcon]="showCancelIcon" (rateChange)="this.ratingLabel = $event" [size]="size">
+      <d-ng-rating-label>{{ this.ratingLabel }}</d-ng-rating-label>
+    </d-ng-rating>
   `,
 })
 export class NgRatingTestComponent {
@@ -392,7 +392,7 @@ export class NgRatingTestComponent {
 }
 
 @Component({
-  template: ` <ng-rating [size]="size" [rating]="rating"> </ng-rating> `,
+  template: ` <d-ng-rating [size]="size" [rating]="rating"> </d-ng-rating> `,
 })
 export class NgRatingPreDefinedTestComponent {
   @ViewChild(NgRatingComponent) ratingComponent: NgRatingComponent;
@@ -401,7 +401,9 @@ export class NgRatingPreDefinedTestComponent {
 }
 
 @Component({
-  template: ` <ng-rating [size]="size" [readonly]="readonly" [disabled]="disabled" [rating]="rating"> </ng-rating> `,
+  template: `
+    <d-ng-rating [size]="size" [readonly]="readonly" [disabled]="disabled" [rating]="rating"> </d-ng-rating>
+  `,
 })
 export class NgRatingReadonlyTestComponent {
   @ViewChild(NgRatingComponent) ratingComponent: NgRatingComponent;
@@ -412,7 +414,7 @@ export class NgRatingReadonlyTestComponent {
 }
 
 @Component({
-  template: ` <ng-rating [size]="size" [(ngModel)]="rating"> </ng-rating> `,
+  template: ` <d-ng-rating [size]="size" [(ngModel)]="rating"> </d-ng-rating> `,
 })
 export class NgRatingControlValueAccessorTestComponent {
   @ViewChild(NgRatingComponent) ratingComponent: NgRatingComponent;
@@ -423,7 +425,7 @@ export class NgRatingControlValueAccessorTestComponent {
 @Component({
   template: `
     <form [formGroup]="form">
-      <ng-rating formControlName="ratingControl" [size]="6"></ng-rating>
+      <d-ng-rating formControlName="ratingControl" [size]="6"></d-ng-rating>
     </form>
   `,
 })

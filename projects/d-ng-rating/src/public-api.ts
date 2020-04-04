@@ -1,5 +1,5 @@
 /*
- * Public API Surface of ng-rating
+ * Public API Surface of d-ng-rating
  */
 
 export * from './lib/ng-rating.component';

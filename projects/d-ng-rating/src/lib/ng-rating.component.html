@@ -1,14 +1,14 @@
-<button *ngIf="showCancelIcon" class="ng-rating-cancel" (click)="cancel()">
+<button *ngIf="showCancelIcon" class="d-ng-rating-cancel" (click)="cancel()">
   <fa-icon [icon]="cancelIcon"></fa-icon>
 </button>
 <ng-container *ngFor="let rating of ratings; let index = index">
   <button
     type="button"
-    class="ng-rating-item"
+    class="d-ng-rating-item"
     [attr.aria-selected]="_selectedIndex === index"
     [attr.aria-posinset]="index + 1"
     [disabled]="disabled"
-    [class.ng-rating-item-disabled]="disabled"
+    [class.d-ng-rating-item-disabled]="disabled"
     (mouseenter)="hoveredItem(index)"
     (click)="handleClick(index)"
   >
@@ -18,8 +18,8 @@
   </button>
 </ng-container>
 
-<ng-content select="[ngRatingLabel], ng-rating-label"></ng-content>
+<ng-content select="[ngRatingLabel], d-ng-rating-label"></ng-content>
 
 <ng-template #defaultTemplate let-hovered="hovered">
-  <fa-icon [class.ng-rating-item-icon-hover]="hovered" class="ng-rating-item-icon" [icon]="icon"></fa-icon>
+  <fa-icon [class.d-ng-rating-item-icon-hover]="hovered" class="d-ng-rating-item-icon" [icon]="icon"></fa-icon>
 </ng-template>

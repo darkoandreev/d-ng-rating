@@ -14,8 +14,8 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"],
     "paths": {
-      "@ng-rating/dist": ["dist/ng-rating/angular9-rating", "dist/ng-rating"],
-      "@ng-rating": ["./projects/ng-rating/src/public-api"]
+      "@d-ng-rating/dist": ["dist/d-ng-rating/angular9-rating", "dist/d-ng-rating"],
+      "@d-ng-rating": ["./projects/d-ng-rating/src/public-api"]
     }
   },
   "angularCompilerOptions": {

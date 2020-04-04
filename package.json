@@ -1,5 +1,5 @@
 {
-  "name": "ng-rating",
+  "name": "d-ng-rating",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,13 +8,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "test-headless": "ng test ng-rating --watch=false --browsers=ChromeHeadless"
+    "test-headless": "ng test d-ng-rating --watch=false --browsers=ChromeHeadless"
   },
   "private": true,
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged && ng lint",
-      "pre-push": "ng build ng-rating --prod"
+      "pre-push": "ng build d-ng-rating --prod"
     }
   },
   "dependencies": {
