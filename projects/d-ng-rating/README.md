@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.com/darkoandreev/d-ng-rating.svg?token=dyC7xCjKChVxFuxWSFtn&branch=master)](https://travis-ci.com/darkoandreev/d-ng-rating)
 
+[![codecov](https://codecov.io/gh/darkoandreev/d-ng-rating/branch/master/graph/badge.svg?token=X970X32DCF)](https://codecov.io/gh/darkoandreev/d-ng-rating)
+
 ## Overview
 
 Rating is Angular component that helps visualising and interacting with a star rating bar.
