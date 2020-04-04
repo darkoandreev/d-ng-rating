@@ -82,7 +82,7 @@ Please find the related API below.
 ### Reference
 
 ```javascript
-import { NgratingModule } from '@d-ng-rating';
+import { NgRatingModule } from '@d-ng-rating';
 ```
 
 ### NgRatingComponent
