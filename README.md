@@ -14,7 +14,7 @@ You need to have an Angular project with the supported Angular version. We stron
 After installing the above dependencies, install **d-ng-rating** via:
 
 ```html
-npm install --save @d-ng-rating/d-ng-rating
+npm install d-ng-rating --save
 ```
 
 Once installed you need to import our main module:
