@@ -101,10 +101,6 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
     return 0;
   }
 
-  @HostBinding('attr.aria-valuemax') get ariaValueMax(): number {
-    return this.size;
-  }
-
   @HostBinding('attr.aria-valuenow') get ariaValueNow(): number {
     return this._selectedIndex + 1;
   }
@@ -119,18 +115,6 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
 
   @HostBinding('attr.tabindex') get tabindexAttr(): number {
     return this.disabled ? -1 : 0;
-  }
-
-  @HostBinding('attr.aria-disabled') get ariaDisabled(): boolean {
-    return this.disabled;
-  }
-
-  @HostBinding('attr.aria-readonly') get ariaReadonly(): boolean {
-    return this.readonly;
-  }
-
-  @HostBinding('attr.aria-setsize') get ariaSetSize(): number {
-    return this.size;
   }
 
   /**
@@ -164,6 +148,8 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * @memberOf NgRatingComponent
    */
   @Input()
+  @HostBinding('attr.aria-valuemax')
+  @HostBinding('attr.aria-setsize')
   public get size(): number {
     return this._size;
   }
@@ -193,6 +179,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * @memberOf NgRatingComponent
    */
   @Input()
+  @HostBinding('attr.aria-readonly')
   public get readonly(): boolean {
     return this._readonly;
   }
@@ -212,6 +199,7 @@ export class NgRatingComponent implements OnChanges, ControlValueAccessor {
    * @memberOf NgRatingComponent
    */
   @Input()
+  @HostBinding('attr.aria-disabled')
   public get disabled(): boolean {
     return this._disabled;
   }
