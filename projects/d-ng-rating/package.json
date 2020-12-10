@@ -24,10 +24,12 @@
     "ng rating"
   ],
   "license": "MIT",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "peerDependencies": {
-    "@angular/common": "^9.0.6",
-    "@angular/core": "^9.0.6",
-    "tslib": "^1.10.0",
+    "@angular/common": "^10.2.3",
+    "@angular/core": "^10.2.3",
     "@fortawesome/angular-fontawesome": "^0.6.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-solid-svg-icons": "^5.12.1"
