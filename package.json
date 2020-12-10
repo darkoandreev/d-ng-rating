@@ -42,7 +42,7 @@
     "@angular-devkit/build-ng-packagr": "~0.901.0",
     "@angular/cli": "~9.1.0",
     "@angular/compiler-cli": "~9.1.0",
-    "@angular/flex-layout": "^9.0.0-beta.29",
+    "@angular/flex-layout": "^10.0.0-beta.32",
     "@angular/language-service": "~9.1.0",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
