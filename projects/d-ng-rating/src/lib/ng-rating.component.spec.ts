@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { NgRatingComponent } from './ng-rating.component';
 import { Component, ViewChild, DebugElement, OnInit } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -16,7 +16,7 @@ describe('NgRatingComponent', () => {
   let component: NgRatingTestComponent;
   let fixture: ComponentFixture<NgRatingTestComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [NgRatingModule, FormsModule, ReactiveFormsModule],
       declarations: [
