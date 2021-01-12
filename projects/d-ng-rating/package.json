@@ -1,6 +1,6 @@
 {
   "name": "d-ng-rating",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": {
     "name": "Darko Andreev",
     "email": "andreev.darko@gmail.com",
@@ -28,10 +28,10 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/common": "^10.2.3",
-    "@angular/core": "^10.2.3",
-    "@fortawesome/angular-fontawesome": "^0.6.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.27",
-    "@fortawesome/free-solid-svg-icons": "^5.12.1"
+    "@angular/common": "^11.0.8",
+    "@angular/core": "^11.0.8",
+    "@fortawesome/angular-fontawesome": "^0.8.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1"
   }
 }
