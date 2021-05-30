@@ -32,8 +32,8 @@
     "@fortawesome/angular-fontawesome": "^0.8.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
-    "ngx-clipboard": "^13.0.0",
-    "ngx-markdown": "^11.0.1",
+    "ngx-clipboard": "^14.0.1",
+    "ngx-markdown": "^12.0.1",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
